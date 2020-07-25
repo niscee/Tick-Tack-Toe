@@ -27,11 +27,11 @@ def display_board():
 
 
 def start_game():
-
+    #game intro message
     def intro():
         print("--------------------------------- Tick-Tack-Toe---------------------------------------------")
     
-    #getting player name and adding it to player_name(list)
+    #getting player name and inserting it to player_name(list)
     def get_player_name():
         global current_player
         global players_name
@@ -40,7 +40,7 @@ def start_game():
         current_player = players_name[0]
 
        
-    #setting player position and player sign "X" or "O"
+    #setting player position with sign "X" or "O"
     def set_position(position):
         if current_player == players_name[0]:
             board[position] = "X"
@@ -49,7 +49,7 @@ def start_game():
            
 
 
-    #getting player game moves
+    #getting each player moves
     def handle_move():
         try:
             print(f'<{current_player}> turns....')
@@ -64,42 +64,46 @@ def start_game():
             print("Invalid Input....")
             handle_move()        
 
-
+    #checking if the game is over or not
     def check_if_game_over():
-        
-        def check_row():
+
+        def setWinner():
             global GAME_STILL_GOING, WINNER
+            WINNER = current_player
+            GAME_STILL_GOING = False
+
+        
+        #checking the each row 
+        def check_row():
             row1 = board[0] == board[1] == board[2] != "-" 
             row2 = board[3] == board[4] == board[5] != "-"  
             row3 = board[6] == board[7] == board[8] != "-" 
-            if row1 or row2 or row3:
-                WINNER = current_player
-                GAME_STILL_GOING = False
+            if row1 or row2 or row3: 
+                setWinner()
+                
 
-
+        #checking the each column
         def check_column():
-            global GAME_STILL_GOING, WINNER
             col1 = board[0] == board[3] == board[6] != "-" 
             col2 = board[1] == board[4] == board[7] != "-"  
             col3 = board[2] == board[5] == board[8] != "-" 
-            if col1 or col2 or col3:
-                WINNER = current_player
-                GAME_STILL_GOING = False 
+            if col1 or col2 or col3: 
+                setWinner()
+                 
                 
-
+        #checking the each diagonal
         def check_diagonal():
-            global GAME_STILL_GOING, WINNER
             diagonal1 = board[0] == board[4] == board[8] != "-" 
             diagonal2 = board[2] == board[4] == board[6] != "-" 
-            if diagonal1 or diagonal2:
-                WINNER = current_player
-                GAME_STILL_GOING = False 
+            if diagonal1 or diagonal2: 
+                setWinner()
+                
                 
                             
-
+        #checking if the game is tie
         def check_if_tie():
             global GAME_STILL_GOING
-            """ filtering out the number of spots whose value is '-' """
+            #filtering out the number of spots whose value is '-'
             tie = list(filter(lambda x: x == "-", board))
             if len(tie) < 1:
                 GAME_STILL_GOING = False 
@@ -124,7 +128,7 @@ def start_game():
             current_player = players_name[0]
 
                 
-    """ function call """
+    """ calling the main functions """
     intro()
     get_player_name() 
 
