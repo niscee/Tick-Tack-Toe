@@ -6,18 +6,16 @@ board = [
         "-", "-", "-"
         ]
 
-#list to save players name
+#list of players name
 players_name = []
 
 #if game is still going
 GAME_STILL_GOING = True
 
-#someone wins the game, WINNER == ? player[0] or player[1] : None
+#someone wins the game ? WINNER == player[0] or player[1] : WINNER == None
 WINNER = None
 current_player = " "
 
-
-""" function body """
 #displaying the board 
 def display_board():
     print(f'              {board[0]}|{board[1]}|{board[2]}')
@@ -25,13 +23,13 @@ def display_board():
     print(f'              {board[6]}|{board[7]}|{board[8]}')
 
 
-
+# main functions
 def start_game():
     #game intro message
     def intro():
         print("--------------------------------- Tick-Tack-Toe---------------------------------------------")
     
-    #getting player name and inserting it to player_name(list)
+    #getting player name and appending it to a list(player_name)
     def get_player_name():
         global current_player
         global players_name
